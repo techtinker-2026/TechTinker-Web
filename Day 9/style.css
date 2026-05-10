@@ -1,0 +1,106 @@
+.car:hover{
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+
+}
+.led:hover{
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+.github:hover{
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+.home:hover{
+background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.62) 1%, rgba(254, 254, 254, 1) 0%, rgba(250, 250, 250, 0.301) 0%);
+        border-radius: 2em;
+        
+}
+.projects:hover{
+background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.62) 1%, rgba(254, 254, 254, 1) 0%, rgba(250, 250, 250, 0.301) 0%);
+        border-radius: 2em;
+        
+}
+.githubtext:hover{
+background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.62) 1%, rgba(254, 254, 254, 1) 0%, rgba(250, 250, 250, 0.301) 0%);
+        border-radius: 2em;
+        
+}
+.contact:hover {
+    background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.62) 1%, rgba(254, 254, 254, 1) 0%, rgba(250, 250, 250, 0.301) 0%);
+    border-radius: 2em;
+
+}
+.form-labell{
+    color: white;
+    padding-top:2%;
+}
+.form-cont {
+    
+    height:60%;
+    width:100%;
+    border-radius:10em;
+    border: 0.1em solid;
+    padding-left: 3%;
+    border-color: white;
+    background-color: #ffffff83;
+}
+.form-contr {
+    
+    height:100%;
+    width:100%;
+    border-radius:2em;
+    border: 0.1em solid;
+    padding-left: 2em;
+    border-color: white;
+    background-color: #ffffff83;
+    padding-top: 1em;
+}
+.form-contr:hover{
+    background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.62) 1%, rgba(254, 254, 254, 1) 0%, rgba(250, 250, 250, 0.301) 0%);
+    border-radius: 2em;
+}
+.form-cont:hover{
+    background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.62) 1%, rgba(254, 254, 254, 1) 0%, rgba(250, 250, 250, 0.301) 0%);
+    border-radius: 2em;
+}
+.btn{
+    background-color: #ffffff83;
+    border: 0.1em solid;
+    border-color: white;
+    border-radius: 1em;
+}
+.btn:hover{
+    background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.62) 1%, rgba(254, 254, 254, 1) 0%, rgba(250, 250, 250, 0.301) 0%);
+    border-radius: 2em;
+    
+}
+.custom-alert {
+    position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+    background: rgba(0, 0, 0, 0.26);
+    backdrop-filter: blur(10px);
+
+    color: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+
+    border: 1px solid rgb(255, 255, 255);
+
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.custom-alert.show {
+    opacity: 1;
+}

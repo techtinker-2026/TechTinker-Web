@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTinker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="Day 9\Untitled.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body >
+<link rel="stylesheet" href="Day 9/style.css">
+
+
+
+
+    <style>
+        /* -- Variables ------------------------------------------------- */
+        :root {
+            --bg-grad-1: #6a11cb;
+            /* Gradient Start */
+            --bg-grad-2: #2575fc;
+            /* Gradient End */
+            --text-color: #ffffff;
+            /* Main Text/Brand */
+            --v-pad: 0.85rem;
+            /* Vertical Padding */
+            --h-pad: 2rem;
+            /* Horizontal Padding */
+            --blur: 16px;
+            /* Glass Blur */
+            --opacity: 15;
+            /* Glass Opacity (0-100) */
+            --nav-w: 1100px;
+            /* Container Width */
+        }
+    
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+    
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-color);
+            min-height: 200vh;
+            background-image: linear-gradient(45deg, var(--bg-grad-1), var(--bg-grad-2));
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+    
+        /* -- Navbar Implementation --------------------------------------- */
+        .nav-wrapper {
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+    
+        /* Positioning Logic */
+        body[data-fixed="Yes"] .nav-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    
+        body[data-fixed="No"] .nav-wrapper {
+            position: relative;
+        }
+    
+        /* Width & Padding Logic */
+        body[data-full="No"] .nav-wrapper {
+            padding: 1.5rem;
+        }
+    
+        body[data-full="No"] .nav-wrapper.scrolled {
+            padding: 0.75rem 1.5rem;
+        }
+    
+        body[data-full="Yes"] .nav-wrapper {
+            padding: 0;
+        }
+    
+        nav.glass-nav {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--v-pad) var(--h-pad);
+            border-radius: 100em;
+            
+    
+            /* Glassmorphism */
+            background: rgba(255, 255, 255, calc(var(--opacity) / 100));
+            backdrop-filter: blur(var(--blur)) saturate(180%);
+            -webkit-backdrop-filter: blur(var(--blur)) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    
+            transition: all 0.3s ease;
+        }
+    
+        .nav-wrapper.scrolled nav.glass-nav {
+            padding-top: calc(var(--v-pad) * 0.8);
+            padding-bottom: calc(var(--v-pad) * 0.8);
+        }
+    
+        /* Inner Content Padding when Full Width */
+        body[data-full="Yes"] nav.glass-nav {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+    
+        /* Layout Switch */
+        body[data-full="No"] nav.glass-nav {
+            max-width: var(--nav-w);
+            border-radius: 100px;
+        }
+    
+        body[data-full="Yes"] nav.glass-nav {
+            max-width: 100%;
+            border-radius: 0;
+        }
+    
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-color);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+    
+        .links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+        }
+    
+        .links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            opacity: 0.85;
+            transition: 0.2s;
+        }
+    
+        .links a:hover,
+        .links a.active {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.15);
+        }
+    
+        /* -- Hamburger (Mobile Only) ----------------------------------- */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 5px;
+            flex-direction: column;
+            gap: 6px;
+        }
+    
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-color);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+    
+        /* -- Content ----------------------------------------------------- */
+        .hero {
+            padding: 12rem 2rem 5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    
+        body[data-fixed="No"] .hero {
+            padding-top: 5rem;
+        }
+    
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.04em;
+        }
+    
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    
+        .dummy-section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+    
+        .card h2 {
+            margin-bottom: 1rem;
+        }
+    
+        .card p {
+            opacity: 0.7;
+            line-height: 1.7;
+        }
+    
+        /* -- Responsive -------------------------------------------------- */
+        @media (max-width: 480px) {
+            .hamburger {
+                display: flex;
+            }
+    
+            .links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 1rem;
+                right: 1rem;
+                margin-top: 1rem;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(20px);
+                padding: 1.5rem;
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+    
+            body[data-full="Yes"] .links {
+                left: 0;
+                right: 0;
+                margin-top: 0;
+                border-radius: 0;
+            }
+    
+            .nav-wrapper.menu-open .links {
+                display: flex;
+            }
+    
+            .nav-wrapper.menu-open .hamburger span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+    
+            .nav-wrapper.menu-open .hamburger span:nth-child(2) {
+                opacity: 0;
+            }
+    
+            .nav-wrapper.menu-open .hamburger span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+    </style>
+    </head>
+    
+    <body data-fixed="Yes" data-full="No">
+    
+        <div class="nav-wrapper" id="navWrap">
+            <nav class="glass-nav">
+                <a href="#" class="logo">TechTinker</a>
+    
+                <div class="col-md-6 col-3 my-auto d-flex flex-row-reverse">
+                    <nav class="navbar navbar-expand-lg ">
+                        <div class="container-fluid">
+                            <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link active text-white home" aria-current="page" href="#home">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white projects" href="#projects">Projects</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white githubtext" href="#github">GitHub</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white contact" href="#contact">Contact me</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+    
+                <div class="hamburger" id="ham">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+        <script>
+            const navWrap = document.getElementById('navWrap');
+            const ham = document.getElementById('ham');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navWrap.classList.add('scrolled');
+                } else {
+                    navWrap.classList.remove('scrolled');
+                }
+            });
+
+            ham.addEventListener('click', () => {
+                navWrap.classList.toggle('menu-open');
+            });
+        </script>
+    </header>
+    
+    <section  class=" p-5" id="home">
+        <div class="container pt-5">
+            <div class="row align-items-center" >
+                <div class="col-md-6 p-5 ps-auto">
+
+                    <img class="rounded-circle img-fluid" src="Day 9\Untitled.png" alt="max" width="400" height="400">
+
+                </div>
+                <div class="col-md-6 align-items-center">
+
+                    <h1 class="display-4 fw-bold text-white">Hi, Welcome To TechTinker</h1>
+                    <p class="lead text-white" >Here is all about exploring technology in a simple and practical way. Here, you’ll find
+                    DIY projects, tutorials on operating system installation, microcontrollers, programming, electronics, and much more.
+                    Whether you're just starting out or already into tech, TechTinker helps you learn, build, and innovate. Join us and
+                    start tinkering your way into the world of technology!</p>
+
+                </div>
+            </div>
+        </div >
+    </section >
+
+    <section class=" p-5 m-5 border border-light" style="background: #704bbf;background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 100%, rgba(9, 9, 121, 1) 100%, rgba(0, 212, 255, 1) 100%); border-radius: 5em; border: white,5rem" id="projects">
+        <div class="container">
+            <h1 class="text-center fw-bold text-white ">Projects</h1>
+            <div class="row ">
+
+                
+                <div class="col-md-4 mx-auto my-auto">
+                    <a href="https://www.youtube.com/embed/Qd6d8mr-ei0" title="Bluetooth Controlled Arduino Car | DIY Robot Car Project | Control Your Robotic Car with Phone" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="text-decoration: none;">
+                    <div class="card text-center p-3 pt-4 m-3 car" >
+                        <iframe width="auto" height="auto" src="https://www.youtube.com/embed/Qd6d8mr-ei0" title="Bluetooth Controlled Arduino Car | DIY Robot Car Project | Control Your Robotic Car with Phone" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="card-body">
+                            <h5 class="card-title">Bluetooth Controlled Arduino Car</h5>
+                            <p class="card-text">A DIY robot car controlled via Bluetooth.Controll using phone</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-md-4 mx-auto my-auto">
+                    <a href="https://www.youtube.com/embed/CczWrJ4HNmY" title="Arduino Bluetooth Controlled Running Text LED Display | Real-Time Arduino Control Using Phone" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="text-decoration: none;">
+                    <div class="card text-center p-3 pt-4 m-3 led" style="width: auto;">
+                        <iframe width="auto" height="auto" src="https://www.youtube.com/embed/CczWrJ4HNmY"
+                            title="Arduino Bluetooth Controlled Running Text LED Display | Real-Time Arduino Control Using Phone"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="card-body">
+                            <h5 class="card-title">Arduino Bluetooth Controlled Running Text LED Display</h5>
+                            <p class="card-text">A real-time Arduino control project using Bluetooth.</p>
+                
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section id="github" class="p-5 m-5 b-5 border border-light" style=" background: #704bbf;background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 100%, rgba(9, 9, 121, 1) 100%, rgba(0, 212, 255, 1) 100%); border-radius: 5em;" >
+        <div class="container">
+            <h1 class="text-center fw-bold text-white">GitHub</h1>
+            <div class="row">
+
+                <div class="col-md-4 mx-auto my-auto">
+                    <a href="https://github.com/techtinker-2026" style="text-decoration: none;">
+                    <div class="card text-center p-3 pt-4 m-3 github" style="width: auto;">
+                    <i class="bi bi-github display-1"></i>
+                        <div class="card-body">
+                            <h5 class="card-title">GitHub</h5>
+                            <p class="card-text">Check out my GitHub profile for more projects.</p>
+                
+                        </div>
+                    </div>
+                </a>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="p-5 m-5 b-5 border border-light" style=" background: #704bbf;background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 100%, rgba(9, 9, 121, 1) 100%, rgba(0, 212, 255, 1) 100%); border-radius: 5em;">
+            <div class="container">
+                <h1 class="text-center fw-bold text-white">Contact me</h1>
+                <div class="row align-items-center">
+                    <div class="p-5 ps-auto">
+                        <form id="submit-form" action="">
+                            <div class="mb-3 ">
+                                <div class="row">
+                                    <div class="col-md-6" >
+                                    <label for="namee" class="form-labell">Name</label><br>  
+                                    <input type="text" cursor="pointer" class="form-cont" id="namee" name="name"  placeholder="Enter your name">
+                                    </div>
+                                    <div class="col-md-6">
+                                    <label for="place" class="form-labell text-white" style="padding-top: 3;">Place</label>
+                                    <input type="text" class="form-cont" name="place" id="place" placeholder="Enter your place">
+                                </div>
+                            </div>
+                                    
+                                
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6">                              
+                                        <label for="email" class="form-labell text-white" style="border-radius: 10em;padding-top: 2%;">Email address</label>   
+                                        <input type="email" class="form-cont" id="email" name="email" placeholder="Enter your email">
+                                    </div> 
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-labell text-white" style="border-radius: 10em;padding-top: 2%;">Phone number</label>
+                                        <input type="tel" class="form-cont" id="phone" name="phone" placeholder="Enter your phone number">
+                                    </div>
+                            </div>
+                        </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-labell text-white" style="border-radius: 10em;padding-top: 2%;;">Message</label>
+                                <textarea class="form-contr" id="message" name="message" rows="6" placeholder="Enter your message..."></textarea>
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn " cursor="pointer" style="width: 100%;  font-weight: bold;">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+    <footer style="background-color: #06010e;">
+        <div class="container">
+            <div class="row pt-3">
+                <div class="col-md-12 text-center">
+                <a style="text-decoration: none; font-size: 130%; font-family: monospace; color: white;"
+                    href="https://www.youtube.com/@TechTinker-2026">
+                    <i class="bi bi-youtube text-white display-7"></i>
+                    </a>
+                    <p class="text-center text-white p-3">© 2026 . All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <script>
+        $("#submit-form").submit((e) => {
+            e.preventDefault()
+            $.ajax({
+                url: "https://script.google.com/macros/s/AKfycbzzlXhJZ0RIsGgoTUvUwKyg1JkXdxYbb9u8Ob7mkr60NtzgZTOnTcG3XjYnlEnRuBylYg/exec",
+                data: $("#submit-form").serialize(),
+                method: "post",
+                success: function (response) {
+                    
+
+                    document.getElementById("customAlert").classList.add("show")
+
+                    setTimeout(() => {
+                        document.getElementById("customAlert").classList.remove("show")
+                        window.location.reload()
+                    }, 2000)
+
+
+                    
+                },
+                error: function (err) {
+                    alert("Something Error")
+
+                }
+            })
+        })
+
+    </script>
+
+<div id="customAlert" class="custom-alert">
+    ✅ Form submitted successfully!
+</div>
+
+</body>
+</html>
