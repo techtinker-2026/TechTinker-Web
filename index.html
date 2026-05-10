@@ -305,12 +305,6 @@
                         </div>
                     </nav>
                 </div>
-    
-                <div class="hamburger" id="ham">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </nav>
         </div>
         <script>
@@ -364,7 +358,7 @@
                         <iframe width="auto" height="auto" src="https://www.youtube.com/embed/Qd6d8mr-ei0" title="Bluetooth Controlled Arduino Car | DIY Robot Car Project | Control Your Robotic Car with Phone" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="card-body">
                             <h5 class="card-title">Bluetooth Controlled Arduino Car</h5>
-                            <p class="card-text">A DIY robot car controlled via Bluetooth.Controll using phone</p>
+                            
                         </div>
                     </div></a>
                 </div>
@@ -378,7 +372,6 @@
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="card-body">
                             <h5 class="card-title">Arduino Bluetooth Controlled Running Text LED Display</h5>
-                            <p class="card-text">A real-time Arduino control project using Bluetooth.</p>
                 
                         </div>
                     </div>
@@ -414,17 +407,17 @@
             <div class="container">
                 <h1 class="text-center fw-bold text-white">Contact me</h1>
                 <div class="row align-items-center">
-                    <div class="p-5 ps-auto">
+                    <div class="pt-auto pb-auto ps-auto">
                         <form id="submit-form" action="">
                             <div class="mb-3 ">
                                 <div class="row">
-                                    <div class="col-md-6" >
+                                    <div class="col-md-12" >
                                     <label for="namee" class="form-labell">Name</label><br>  
-                                    <input type="text" cursor="pointer" class="form-cont" id="namee" name="name"  placeholder="Enter your name">
+                                    <input style="width: 100%;" type="text" cursor="pointer" class="form-cont" id="namee" name="name"  placeholder="Enter your name">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                     <label for="place" class="form-labell text-white" style="padding-top: 3;">Place</label>
-                                    <input type="text" class="form-cont" name="place" id="place" placeholder="Enter your place">
+                                    <input style="width: 100%;" type="text" class="form-cont" name="place" id="place" placeholder="Enter your place">
                                 </div>
                             </div>
                                     
@@ -432,19 +425,19 @@
                             </div>
                             <div class="mb-3">
                                 <div class="row">
-                                    <div class="col-md-6">                              
+                                    <div class="col-md-12">                              
                                         <label for="email" class="form-labell text-white" style="border-radius: 10em;padding-top: 2%;">Email address</label>   
-                                        <input type="email" class="form-cont" id="email" name="email" placeholder="Enter your email">
+                                        <input style="width: 100%;" type="email" class="form-cont" id="email" name="email" placeholder="Enter your email">
                                     </div> 
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="phone" class="form-labell text-white" style="border-radius: 10em;padding-top: 2%;">Phone number</label>
-                                        <input type="tel" class="form-cont" id="phone" name="phone" placeholder="Enter your phone number">
+                                        <input style="width: 100%;" type="tel" class="form-cont" id="phone" name="phone" placeholder="Enter your phone number">
                                     </div>
                             </div>
                         </div>
                             <div class="mb-3">
                                 <label for="message" class="form-labell text-white" style="border-radius: 10em;padding-top: 2%;;">Message</label>
-                                <textarea class="form-contr" id="message" name="message" rows="6" placeholder="Enter your message..."></textarea>
+                                <textarea style="width: 100%;" class="form-contr" id="message" name="message" rows="6" placeholder="Enter your message..."></textarea>
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn " cursor="pointer" style="width: 100%;  font-weight: bold;">Submit</button>
@@ -488,7 +481,7 @@
                     setTimeout(() => {
                         document.getElementById("customAlert").classList.remove("show")
                         window.location.reload()
-                    }, 2000)
+                    }, 1000)
 
 
                     
